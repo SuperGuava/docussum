@@ -3,6 +3,7 @@ import { z } from "zod";
 import { AuthError } from "@/lib/auth/errors";
 import { requireAuthUser } from "@/lib/auth/get-user";
 import { resolveCreditPackage } from "@/lib/credits/packages";
+import { getAppBaseUrl } from "@/lib/app-url";
 import { getStripe } from "@/lib/stripe/client";
 
 const bodySchema = z.object({
@@ -12,11 +13,7 @@ const bodySchema = z.object({
 function getOrigin(request: Request): string {
   const origin = request.headers.get("origin");
   if (origin) return origin;
-  const host = request.headers.get("host");
-  const proto = request.headers.get("x-forwarded-proto") ?? "http";
-  if (host) return `${proto}://${host}`;
-  return process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/auth\/callback$/, "") ??
-    "http://localhost:3002";
+  return getAppBaseUrl(request.headers);
 }
 
 export async function POST(request: Request) {

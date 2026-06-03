@@ -50,8 +50,10 @@ Supabase Auth(Google OAuth)로 사용자를 식별하고, Epic 2의 `DEV_USER_ID
 
 | 환경 | Site URL | Redirect URL |
 |------|----------|--------------|
-| Local | `http://localhost:3000` | `http://localhost:3000/auth/callback` |
-| Production | `https://{your-domain}` | `https://{your-domain}/auth/callback` |
+| Local | `http://localhost:3002` | `http://localhost:3002/auth/callback` |
+| Production (Vercel) | `https://docussum-orcin.vercel.app` | `https://docussum-orcin.vercel.app/auth/callback` |
+
+→ 체크리스트: `docs/deploy/vercel-production.md`
 
 ---
 

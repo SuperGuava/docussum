@@ -18,7 +18,7 @@ export function formatAuthErrorMessage(error: unknown): string {
   }
 
   if (lower.includes("redirect") || lower.includes("url")) {
-    return "Redirect URL이 허용되지 않았습니다. Supabase → Authentication → URL Configuration에 http://localhost:3000/auth/callback 을 추가하세요.";
+    return "Redirect URL이 허용되지 않았습니다. Supabase → Authentication → URL Configuration에 로컬(http://localhost:3002/auth/callback)과 프로덕션(https://docussum-orcin.vercel.app/auth/callback)을 추가하세요. docs/deploy/vercel-production.md 참고.";
   }
 
   return raw || "로그인에 실패했습니다.";

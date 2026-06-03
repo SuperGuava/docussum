@@ -159,6 +159,11 @@ Tech Spec: @docs/tech-spec/[프로젝트명]-tech-spec.md
 -   **Epic 3 (인증)**: `@docs/plan/epic-3-auth-plan.md`
 -   **Epic 4 (결제)**: `@docs/plan/epic-4-payment-plan.md`
 
+## Vercel 프로덕션 배포
+
+- OAuth·환경 변수: `@docs/deploy/vercel-production.md`
+- 프로덕션 URL: `https://docussum-orcin.vercel.app`
+
 ## 참고사항
 
 -   각 에이전트는 독립적으로 작동하지만, Tech Spec Manager는 PRD를 참조하는 것이 권장됩니다.

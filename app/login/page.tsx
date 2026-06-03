@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
+import { getAuthCallbackUrl } from "@/lib/app-url";
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 
 type LoginPageProps = {
   searchParams: Promise<{
@@ -29,9 +31,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     redirect(nextPath);
   }
 
-  const callbackHint =
-    process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-    "http://localhost:3002/auth/callback";
+  const callbackHint = getAuthCallbackUrl(await headers());
 
   const errorMessage =
     params.error === "auth_callback_error"
