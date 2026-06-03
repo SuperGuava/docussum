@@ -1,0 +1,7 @@
+# pnpm 10+ 보안: 의존성 postinstall 스크립트 허용 목록
+# 새 패키지 추가 시 ERR_PNPM_IGNORED_BUILDS가 나면:
+#   pnpm approve-builds --all
+allowBuilds:
+  msw: true
+  sharp: true
+  unrs-resolver: true
