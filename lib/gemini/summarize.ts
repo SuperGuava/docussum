@@ -5,13 +5,14 @@ import type {
 } from "@/types/summary";
 import { DEFAULT_SUMMARY_OPTIONS } from "@/types/summary";
 
-import { GEMINI_MODEL, getGenAIClient, TEXT_INPUT_MAX_CHARS } from "./client";
+import { getGenAIClient, TEXT_INPUT_MAX_CHARS } from "./client";
 import { buildSummaryV2Instruction } from "./prompts-v2";
 import {
   getResponseText,
   GeminiSummaryError,
   mapGeminiError,
 } from "./parse-response";
+import { generateContentWithResilience } from "./retry";
 import { parseStructuredSummaryJson } from "./parse-structured";
 import { fetchYouTubeOEmbed } from "@/lib/youtube/oembed";
 import { resolveSummaryInput } from "@/lib/youtube/resolve-input";
@@ -64,8 +65,8 @@ export async function summarizeContent(
         videoTitle: oembed?.title,
       });
 
-      const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
+      const response = await generateContentWithResilience(ai, (model) => ({
+        model,
         contents: [
           {
             fileData: {
@@ -76,7 +77,7 @@ export async function summarizeContent(
             text: `${instruction}\n\nSummarize the YouTube video at the file URI above.`,
           },
         ],
-      });
+      }));
 
       return parseStructuredSummaryJson(
         getResponseText(response.text),
@@ -86,13 +87,13 @@ export async function summarizeContent(
 
     const instruction = buildSummaryV2Instruction("text", options);
 
-    const response = await ai.models.generateContent({
-      model: GEMINI_MODEL,
+    const response = await generateContentWithResilience(ai, (model) => ({
+      model,
       contents: [
         instruction,
         `Summarize the following text:\n\n${content}`,
       ],
-    });
+    }));
 
     return parseStructuredSummaryJson(getResponseText(response.text));
   } catch (error) {

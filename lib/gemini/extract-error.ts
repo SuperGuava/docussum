@@ -76,3 +76,23 @@ export function isApiKeyError(message: string): boolean {
     lower.includes("invalid api key")
   );
 }
+
+/** 용량·혼잡·일시 장애 — 재시도·다른 모델로 폴백 대상 */
+export function isRetryableCapacityError(message: string): boolean {
+  if (isTokenOrLengthLimitError(message)) return false;
+
+  const lower = message.toLowerCase();
+  return (
+    lower.includes("high demand") ||
+    lower.includes("try again later") ||
+    lower.includes("overloaded") ||
+    lower.includes("rate limit") ||
+    lower.includes("too many requests") ||
+    lower.includes("quota") ||
+    lower.includes("503") ||
+    lower.includes("429") ||
+    lower.includes("unavailable") ||
+    lower.includes("resource_exhausted") ||
+    lower.includes("deadline exceeded")
+  );
+}

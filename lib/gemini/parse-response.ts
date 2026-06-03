@@ -3,6 +3,7 @@ import type { SummaryResultV1 } from "@/types/summary";
 import {
   extractErrorMessage,
   isApiKeyError,
+  isRetryableCapacityError,
   isTokenOrLengthLimitError,
   isYouTubeAccessError,
 } from "./extract-error";
@@ -91,6 +92,14 @@ export function mapGeminiError(error: unknown): GeminiSummaryError {
   if (isYouTubeAccessError(detail)) {
     return new GeminiSummaryError(
       "비공개이거나 접근할 수 없는 YouTube 영상입니다.",
+      "api",
+      detail,
+    );
+  }
+
+  if (isRetryableCapacityError(detail)) {
+    return new GeminiSummaryError(
+      "Gemini 서버가 일시적으로 혼잡합니다. 1~2분 뒤 다시 시도해 주세요. (여러 모델·재시도 후에도 실패한 경우)",
       "api",
       detail,
     );
