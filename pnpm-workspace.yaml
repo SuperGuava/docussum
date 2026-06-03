@@ -1,7 +1,11 @@
-# pnpm 10+ 보안: 의존성 postinstall 스크립트 허용 목록
-# 새 패키지 추가 시 ERR_PNPM_IGNORED_BUILDS가 나면:
-#   pnpm approve-builds --all
+# pnpm 10+ : 의존성 install 스크립트 허용 (ERR_PNPM_IGNORED_BUILDS 방지)
+# 패키지 추가 후 동일 오류가 나면: pnpm approve-builds
+overrides:
+  "@react-email/render": "2.0.8"
 allowBuilds:
-  msw: true
+  "@google/genai": true
+  esbuild: true
+  protobufjs: true
   sharp: true
+  msw: true
   unrs-resolver: true

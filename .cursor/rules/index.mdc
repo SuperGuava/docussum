@@ -142,6 +142,7 @@ PRD와 Tech Spec을 참고해주세요.
 
 PRD: @docs/prd/[프로젝트명]-prd.md
 Tech Spec: @docs/tech-spec/[프로젝트명]-tech-spec.md
+플랜(있을 경우): @docs/plan/epic-3-auth-plan.md
 
 [구현할 기능]을 개발해주세요.
 ```
@@ -151,6 +152,12 @@ Tech Spec: @docs/tech-spec/[프로젝트명]-tech-spec.md
 -   PRD: `[프로젝트명]-prd.md` (예: `qr-customization-prd.md`)
 -   Tech Spec: `[프로젝트명]-tech-spec.md` (예: `qr-customization-tech-spec.md`)
 -   프로젝트명은 소문자와 하이픈(-) 사용
+-   구현 플랜: `docs/plan/[epic]-plan.md` (예: `docs/plan/epic-3-auth-plan.md`)
+
+## 구현 플랜 문서
+
+-   **Epic 3 (인증)**: `@docs/plan/epic-3-auth-plan.md`
+-   **Epic 4 (결제)**: `@docs/plan/epic-4-payment-plan.md`
 
 ## 참고사항
 
